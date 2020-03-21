@@ -2,7 +2,28 @@
 {%extends 'base.html'%}
 
 {%block content%}
-<h1>Hello, world!</h1>
 
+{% if quote %}
+    <div class="container">
+        <h2>{{quote}}</h2>
+    </div>
+{% endif %}
+
+{% if api%}
+    {% if api == "Error..." %}
+        There is a problem in loading API.
+    {% else %}
+
+        <h1>{{api.companyName}}</h1>
+        Market Symbol : {{api.symbol}}<br>
+        Price : ${{api.latestPrice}}<br>
+        Previous Close : {{api.previousClose}}<br>
+        Market Cap : {{api.marketCap}}<br>
+        YTD Change : {{api.ytdChange}}<br>
+        52 WK high : {{api.week52High}}<br>
+        52 WK low :  {{api.week52Low}}<br>
+
+    {% endif %}
+{% endif %}
 
 {%endblock %}
