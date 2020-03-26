@@ -1,0 +1,47 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<h1>Add Stock!!!</h1>
+<br>
+<form action="{% url 'add_stock' %}" method="POST" class="form-inline my-2 my-lg-0">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder=" Add to database" aria-label="Search" name="quote">
+    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Add Stock</button>
+</form>
+
+<br><br>
+<table class="table table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Company Name</th>
+      <th scope="col">Symbol</th>
+      <th scope="col">Price</th>
+      <th scope="col">Previous Close</th>
+      <th scope="col">Market Cap</th>
+      <th scope="col">YTD Change</th>
+      <th scope="col">52 WK High</th>
+      <th scope="col">52 WK Low</th>
+
+    </tr>
+  </thead>
+  <tbody>
+      {%for item in output %}
+      <tr>
+        <td>{{item.companyName}}</td>
+        <td>{{item.symbol}}</td>
+        <td>${{item.latestPrice}}</td>
+        <td>${{item.previousClose}}</td>
+        <td>{{item.marketCap}}</td>
+        <td>{{item.ytdChange}}</td>
+        <td>${{item.week52High}}</td>
+        <td>${{item.week52Low}}</td>
+
+      </tr>
+      {%endfor%}
+
+
+  </tbody>
+</table>
+
+{%endblock %}
